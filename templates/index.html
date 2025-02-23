@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Header with Logo -->
+    <header class="text-center py-4">
+        <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Big M Auto Spares Logo" class="img-fluid" style="max-height: 150px;">
+    </header>
+
+    <!-- Welcome Message -->
+    <div class="container text-center mt-5">
+        <h2>Welcome to Big M Auto Spares Management System</h2>
+        <p>WE KNOW YOUR ENGINE BETTER.</p>
+    </div>
+
+    <!-- Quick Links Section -->
+    <div class="container text-center my-5">
+        <div class="row">
+            <div class="col-md-4">
+                <a href="{{ url_for('add_product') }}" class="btn btn-info btn-lg">Add New Product</a>
+            </div>
+            <div class="col-md-4">
+                <a href="{{ url_for('products') }}" class="btn btn-info btn-lg">View Products</a>
+            </div>
+            <div class="col-md-4">
+                <a href="/view-cart" class="btn btn-info btn-lg">View Cart</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Notice Section -->
+    <div class="container mt-3">
+        <div class="alert alert-info" role="alert">
+            New product stock is available! Check the latest updates in the product list.
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-4">
+        <p>&copy; 2025 Big M Auto Spares Management System | Internal Use Only</p>
+    </footer>
+{% endblock %}

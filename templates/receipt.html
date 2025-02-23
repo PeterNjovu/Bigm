@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        .receipt-container {
+            max-width: 600px;
+            margin: auto;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .company-details {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .company-logo {
+            max-width: 150px;
+            margin-bottom: 10px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .total {
+            font-weight: bold;
+            text-align: right;
+            margin-top: 10px;
+        }
+        .print-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        @media (max-width: 600px) {
+            .receipt-container {
+                padding: 10px;
+            }
+            table {
+                font-size: 14px;
+            }
+            th, td {
+                padding: 8px;
+            }
+        }
+        @media print {
+            .print-btn {
+                display: none;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            .receipt-container {
+                border: none;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="receipt-container">
+        <!-- Company Details -->
+        <div class="company-details">
+            <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Company Logo" class="company-logo">
+            <h2>Big M Auto Spares</h2>
+            <p>Freedom Way, North End, Lusaka, Zambia</p>
+            <p>Email: Bigmauto30@gmail.com</p>
+            <p>Phone: +260 975 596 635 / +260 761 421 800</p>
+            <p>TPIN: 2533399547</p>
+        </div>
+
+        <!-- Receipt Details -->
+        <h2>Receipt</h2>
+        <p>Date: {{ current_date }}</p>
+        <p>Customer Name: {{ customer_name }}</p>
+        {% if not cart %}
+            <p>No items in the cart.</p>
+        {% else %}
+            <table>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+                {% for item in cart.values() %}
+                <tr>
+                    <td>{{ item['name'] }}</td>
+                    <td>{{ item['quantity'] }}</td>
+                    <td>K{{ "%.2f"|format(item['price']) }}</td>
+                    <td>K{{ "%.2f"|format(item['price'] * item['quantity']) }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <p class="total">Grand Total: K{{ "%.2f"|format(total_price) }}</p>
+        {% endif %}
+        <button onclick="window.print()" class="print-btn">Print Receipt</button>
+    </div>
+</body>
+</html>

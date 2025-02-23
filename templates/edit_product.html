@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2 class="text-center">Edit Product</h2>
+    <form method="POST" action="/edit-product/{{ product.id }}" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+            <label class="form-label">Product Name</label>
+            {{ form.name(class="form-control", value=product.name) }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Part Number</label>
+            {{ form.part_number(class="form-control", value=product.part_number) }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Make</label>
+            {{ form.make(class="form-control", value=product.make) }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            {{ form.description(class="form-control", rows="3") }}{{ product.description }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Quantity</label>
+            {{ form.quantity(class="form-control", value=product.quantity) }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Price</label>
+            {{ form.price(class="form-control", value=product.price, step="0.01") }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Supplier</label>
+            {{ form.supplier(class="form-control", value=product.supplier) }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Product Image</label>
+            {{ form.image(class="form-control") }}
+            {% if product.image_file %}
+                <p>Current Image:</p>
+                <img src="{{ url_for('static', filename='images/' + product.image_file) }}" alt="Product Image" style="max-width: 200px;">
+            {% else %}
+                <p>No image uploaded yet.</p>
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary">Update Product</button>
+    </form>
+{% endblock %}

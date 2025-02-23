@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Add a New Product</h1>
+<form action="{{ url_for('add_product') }}" method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        <label for="name" class="form-label">Product Name</label>
+        {{ form.name(class="form-control", id="name") }}
+        {% if form.name.errors %}
+            <div class="text-danger">{{ form.name.errors[0] }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="part_number" class="form-label">Part Number</label>
+        {{ form.part_number(class="form-control", id="part_number") }}
+        {% if form.part_number.errors %}
+            <div class="text-danger">{{ form.part_number.errors[0] }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="make" class="form-label">Make</label>
+        {{ form.make(class="form-control", id="make") }}
+        {% if form.make.errors %}
+            <div class="text-danger">{{ form.make.errors[0] }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        {{ form.description(class="form-control", id="description", rows="3") }}
+        {% if form.description.errors %}
+            <div class="text-danger">{{ form.description.errors[0] }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="quantity" class="form-label">Quantity</label>
+        {{ form.quantity(class="form-control", id="quantity") }}
+        {% if form.quantity.errors %}
+            <div class="text-danger">{{ form.quantity.errors[0] }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        {{ form.price(class="form-control", id="price", step="0.01") }}
+        {% if form.price.errors %}
+            <div class="text-danger">{{ form.price.errors[0] }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="supplier" class="form-label">Supplier</label>
+        {{ form.supplier(class="form-control", id="supplier") }}
+        {% if form.supplier.errors %}
+            <div class="text-danger">{{ form.supplier.errors[0] }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="image" class="form-label">Product Image</label>
+        {{ form.image(class="form-control", id="image") }}
+        {% if form.image.errors %}
+            <div class="text-danger">{{ form.image.errors[0] }}</div>
+        {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary">Add Product</button>
+</form>
+{% endblock %}

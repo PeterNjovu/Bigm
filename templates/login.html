@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        div {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+        p {
+            text-align: center;
+            margin-top: 20px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>Login</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.email.label }}<br>
+            {{ form.email(size=32, placeholder="Enter your email") }}<br>
+            {% for error in form.email.errors %}
+                <span class="error">{{ error }}</span><br>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32, placeholder="Enter your password") }}<br>
+            {% for error in form.password.errors %}
+                <span class="error">{{ error }}</span><br>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.remember_me.label }} {{ form.remember_me() }}  <!-- Add this line -->
+        </div>
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+    <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a>.</p>
+</body>
+</html>
